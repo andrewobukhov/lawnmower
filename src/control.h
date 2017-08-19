@@ -1,3 +1,5 @@
+long len = 0;
+
 void calculateSiganls () {
     // create local variables to hold a local copies of the channel inputs
     // these are declared static so that thier values will be retained
@@ -146,11 +148,12 @@ void calculateSiganls () {
         stop();
 
         //Serial.print(gDirection);
-
         switch (gDirection)
         {
         case DIRECTION_FORWARD:
-            forward();
+            if(len > 20) {
+                forward();
+            }
             break;
         case DIRECTION_REVERSE:
             backward();
