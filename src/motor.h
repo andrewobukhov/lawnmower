@@ -1,78 +1,81 @@
-#define PWMA 3
-#define DIRA 12
-#define BrakeA 9
+#define RPWMA 13
+#define LPWMA 11
+#define RENA 8
+#define LENA 7
 
-#define PWMB 11
-#define DIRB 13
-#define BrakeB 8
+#define RPWMB 5
+#define LPWMB 6
+#define RENB 9
+#define LENB 10
 
 #define PWM_MIN 140
 #define PWM_MAX 255
 
 void initMotors()
 {
-    pinMode(DIRA, OUTPUT);
-    pinMode(DIRB, OUTPUT);
+    pinMode(RPWMA, OUTPUT);
+    pinMode(LPWMA, OUTPUT);
+    pinMode(RENA, OUTPUT);
+    pinMode(LENA, OUTPUT);
 
-    pinMode(BrakeA, OUTPUT);
-    pinMode(BrakeB, OUTPUT);
+    pinMode(RPWMB, OUTPUT);
+    pinMode(LPWMB, OUTPUT);
+    pinMode(RENB, OUTPUT);
+    pinMode(LENB, OUTPUT);
 
-    pinMode(PWMA, OUTPUT);
-    pinMode(PWMB, OUTPUT);
-
-    digitalWrite(BrakeA, HIGH); //Disengage the Brake for Channel A
-    digitalWrite(BrakeB, HIGH); //Disengage the Brake for Channel B
+    digitalWrite(RENA, HIGH); 
+    digitalWrite(LENA, HIGH); 
+    digitalWrite(RENB, HIGH); 
+    digitalWrite(LENB, HIGH); 
 }
 
 void backward()
 {
-    digitalWrite(DIRA, HIGH);  //Establishes forward direction of Channel A
-    digitalWrite(BrakeA, LOW); //Disengage the Brake for Channel A
-    //analogWrite(PWMA, pwm); //Spins the motor on Channel A at full speed
+    analogWrite(LPWMA, 255);
+    analogWrite(LPWMB, 255);
 
-    digitalWrite(DIRB, HIGH);  //Establishes forward direction of Channel B
-    digitalWrite(BrakeB, LOW); //Disengage the Brake for Channel B
-                               //analogWrite(PWMB, pwm); //Spins the motor on Channel B at full speed
+    analogWrite(RPWMA, 0);
+    analogWrite(RPWMB, 0);
 }
 
 void forward()
 {
-    digitalWrite(DIRA, LOW);   //Establishes backward direction of Channel A
-    digitalWrite(BrakeA, LOW); //Disengage the Brake for Channel A
-    //analogWrite(PWMA, pwm); //Spins the motor on Channel A at full speed
+    analogWrite(RPWMA, 255);
+    analogWrite(RPWMB, 255);
 
-    digitalWrite(DIRB, LOW);   //Establishes backward direction of Channel B
-    digitalWrite(BrakeB, LOW); //Disengage the Brake for Channel B
-                               //analogWrite(PWMB, pwm); //Spins the motor on Channel B at full speed
+    analogWrite(LPWMA, 0);
+    analogWrite(LPWMB, 0);
 }
 
 void left()
 {
-    digitalWrite(DIRA, HIGH);  //Establishes backward direction of Channel A
-    digitalWrite(BrakeA, LOW); //Disengage the Brake for Channel A
-    //analogWrite(PWMA, pwm); //Spins the motor on Channel A at full speed
+    analogWrite(LPWMA, 255);
+    analogWrite(RPWMB, 255);
 
-    digitalWrite(DIRB, LOW);   //Establishes backward direction of Channel B
-    digitalWrite(BrakeB, LOW); //Disengage the Brake for Channel B
-                               //analogWrite(PWMB, pwm); //Spins the motor on Channel B at full speed
+    analogWrite(RPWMA, 0);
+    analogWrite(LPWMB, 0);
 }
 
 void right()
 {
-    digitalWrite(DIRA, LOW);   //Establishes backward direction of Channel A
-    digitalWrite(BrakeA, LOW); //Disengage the Brake for Channel A
-    //analogWrite(PWMA, pwm); //Spins the motor on Channel A at full speed
+    analogWrite(LPWMA, 0);
+    analogWrite(RPWMB, 0);
 
-    digitalWrite(DIRB, HIGH);  //Establishes backward direction of Channel B
-    digitalWrite(BrakeB, LOW); //Disengage the Brake for Channel B
-                               //analogWrite(PWMB, pwm); //Spins the motor on Channel B at full speed
+    analogWrite(RPWMA, 255);
+    analogWrite(LPWMB, 255);
 }
 
 void stop()
 {
-    analogWrite(PWMA, 0);
-    analogWrite(PWMB, 0);
+    analogWrite(RPWMA, 0);
+    analogWrite(LPWMA, 0);
 
-    digitalWrite(BrakeA, HIGH); //Engage the Brake for Channel A
-    digitalWrite(BrakeB, HIGH); //Engage the Brake for Channel B
+    analogWrite(RPWMB, 0);
+    analogWrite(LPWMB, 0);
+
+    //digitalWrite(RENA, LOW);
+    //digitalWrite(LENA, LOW);
+
+    //digitalWrite(RENB, LOW);
+    //digitalWrite(LENB, LOW);
 }

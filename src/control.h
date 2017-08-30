@@ -1,6 +1,5 @@
-long len = 0;
-
-void calculateSiganls () {
+void calculateSiganls()
+{
     // create local variables to hold a local copies of the channel inputs
     // these are declared static so that thier values will be retained
     // between calls to loop.
@@ -135,8 +134,8 @@ void calculateSiganls () {
                 break;
             }
 
-            analogWrite(PWMB, throttleLeft);
-            analogWrite(PWMA, throttleRight);
+            //analogWrite(PWMB, throttleLeft);
+            //analogWrite(PWMA, throttleRight);
         }
     }
 
@@ -151,9 +150,7 @@ void calculateSiganls () {
         switch (gDirection)
         {
         case DIRECTION_FORWARD:
-            if(len > 20) {
-                forward();
-            }
+            forward();
             break;
         case DIRECTION_REVERSE:
             backward();
